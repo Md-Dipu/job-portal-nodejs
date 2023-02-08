@@ -1,0 +1,4 @@
+{
+    "git.enableCommitSigning": true,
+    "editor.tabSize": 2
+}
