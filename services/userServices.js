@@ -44,3 +44,11 @@ exports.logInService = async (data) => {
   delete Object.assign(result, { token }).password
   return result
 }
+
+/** find one user by id */
+exports.getUserByIdService = async (id) => {
+  const user = await User.findById(id)
+  const result = user.toObject()
+  delete result.password
+  return result
+}
