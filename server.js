@@ -6,6 +6,7 @@ const app = require('./app')
 
 dotenv.config()
 
+mongoose.set('strictQuery', false)
 mongoose.connect(process.env.MONGODB_URI).then(() => {
   const port = process.env.PORT
   app.listen(port, () => {
