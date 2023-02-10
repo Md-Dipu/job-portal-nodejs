@@ -13,4 +13,11 @@ router.route('/')
     jobControllers.createNewJobController
   )
 
+router.route('/:id')
+  .patch(
+    verifyToken,
+    authorization('hiring-manager'),
+    jobControllers.updateJobByIdController
+  )
+
 module.exports = router
