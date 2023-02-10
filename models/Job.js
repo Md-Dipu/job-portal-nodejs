@@ -55,13 +55,11 @@ const jobSchema = mongoose.Schema(
 
 jobSchema.pre('save', function (next) {
   // checking is salary range modified or not
-  if (!this.isModified('salaryRange')) {
-    next()
-  }
-
-  // checking is salary range valid or not
-  if (this.salaryRange?.to && (this.salaryRange.from < this.salaryRange.to)) {
-    throw new Error('Salary range isn\'t valid')
+  if (this.isModified('salaryRange')) {
+    // checking is salary range valid or not
+    if (this.salaryRange?.to && (this.salaryRange.from < this.salaryRange.to)) {
+      throw new Error('Salary range isn\'t valid')
+    }
   }
 
   next()
