@@ -5,7 +5,7 @@ const {
 
 exports.createNewJobController = async (req, res) => {
   try {
-    const result = await createNewJobService(req.body)
+    const result = await createNewJobService(req.user._id, req.body)
     res.status(200).json({
       success: true,
       message: 'Job created successfully',
