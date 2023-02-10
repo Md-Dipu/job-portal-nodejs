@@ -1,6 +1,7 @@
 const cors = require('cors')
 const express = require('express')
 
+const jobRoutes = require('./routes/jobRouters')
 const userRoutes = require('./routes/userRoutes')
 
 const app = express()
@@ -8,6 +9,7 @@ const app = express()
 app.use(express.json())
 app.use(cors())
 
+app.use('/jobs', jobRoutes)
 app.use('/user', userRoutes)
 
 app.get('/', (req, res) => {
