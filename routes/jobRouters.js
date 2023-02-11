@@ -22,4 +22,10 @@ router.route('/:id')
   )
   .get(jobControllers.getJobByIdController)
 
+router.route('/:id/apply')
+  .post(
+    verifyToken,
+    jobControllers.applyJobController
+  )
+
 module.exports = router
