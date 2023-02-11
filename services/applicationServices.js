@@ -27,3 +27,9 @@ exports.applyJobService = async (jobId, userId, data) => {
 
   return application
 }
+
+exports.getApplicationsByJobId = async (jobId) => {
+  const applications = await Application.find({ 'job.id': jobId })
+  const count = await Application.countDocuments({ 'job.id': jobId })
+  return { applications, count }
+}
