@@ -12,6 +12,7 @@ router.route('/')
     authorization('hiring-manager'),
     jobControllers.createNewJobController
   )
+  .get(jobControllers.getJobsController)
 
 router.route('/:id')
   .patch(

@@ -1,8 +1,10 @@
 const {
   createNewJobService,
   updateJobByIdService,
-  getJobById
+  getJobByIdService,
+  getJobsService
 } = require('../services/jobServices')
+const parseQuery = require('../utils/parseQuery')
 
 exports.createNewJobController = async (req, res) => {
   try {
@@ -25,7 +27,7 @@ exports.createNewJobController = async (req, res) => {
 
 exports.updateJobByIdController = async (req, res) => {
   try {
-    const job = await getJobById(req.params.id)
+    const job = await getJobByIdService(req.params.id)
     if (job.hiringManager.id.toString() !== req.user._id) {
       return res.status(403).json({
         success: false,
@@ -50,7 +52,7 @@ exports.updateJobByIdController = async (req, res) => {
 
 exports.getJobByIdController = async (req, res) => {
   try {
-    const job = await getJobById(req.params.id)
+    const job = await getJobByIdService(req.params.id)
     res.status(200).json({
       success: true,
       message: 'Job found successfully',
@@ -60,6 +62,27 @@ exports.getJobByIdController = async (req, res) => {
     res.status(500).json({
       success: false,
       message: 'Unable to find job',
+      error: err.message
+    })
+  }
+}
+
+exports.getJobsController = async (req, res) => {
+  const { filters, queries } = parseQuery(req.query)
+
+  try {
+    console.log(filters, queries)
+    const result = await getJobsService(filters, queries)
+    res.status(200).json({
+      success: true,
+      message: 'Jobs found successfully',
+      data: result.jobs,
+      count: result.count
+    })
+  } catch (err) {
+    res.status(500).json({
+      success: false,
+      message: 'Unable to find jobs',
       error: err.message
     })
   }

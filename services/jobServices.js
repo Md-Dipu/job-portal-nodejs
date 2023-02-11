@@ -23,7 +23,18 @@ exports.updateJobByIdService = async (id, data) => {
 }
 
 /** get job by id */
-exports.getJobById = async (id) => {
+exports.getJobByIdService = async (id) => {
   const job = await Job.findById(id)
   return job
+}
+
+/** get job by id */
+exports.getJobsService = async (filters, queries) => {
+  const jobs = await Job.find(filters)
+    .limit(queries.limit)
+    .select(queries.fields)
+    .skip(queries.skip)
+    .sort(queries.sortby)
+  const count = await Job.countDocuments(filters)
+  return { jobs, count }
 }
