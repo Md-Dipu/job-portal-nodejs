@@ -71,7 +71,6 @@ exports.getJobsController = async (req, res) => {
   const { filters, queries } = parseQuery(req.query)
 
   try {
-    console.log(filters, queries)
     const result = await getJobsService(filters, queries)
     res.status(200).json({
       success: true,
