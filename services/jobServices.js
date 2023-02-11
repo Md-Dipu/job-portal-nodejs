@@ -21,3 +21,9 @@ exports.updateJobByIdService = async (id, data) => {
   const result = await Job.updateOne({ _id: id }, data, { runValidators: true })
   return result
 }
+
+/** get job by id */
+exports.getJobById = async (id) => {
+  const job = await Job.findById(id)
+  return job
+}
