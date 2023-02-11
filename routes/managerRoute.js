@@ -10,5 +10,6 @@ router.use(verifyToken)
 router.use(authorization('hiring-manager'))
 
 router.get('/jobs', managerControllers.getJobsController)
+router.get('/jobs/:id', managerControllers.getJobController)
 
 module.exports = router
