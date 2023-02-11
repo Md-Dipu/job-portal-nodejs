@@ -19,5 +19,6 @@ router.route('/:id')
     authorization('hiring-manager'),
     jobControllers.updateJobByIdController
   )
+  .get(jobControllers.getJobByIdController)
 
 module.exports = router

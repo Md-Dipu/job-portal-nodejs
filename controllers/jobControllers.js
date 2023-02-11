@@ -47,3 +47,20 @@ exports.updateJobByIdController = async (req, res) => {
     })
   }
 }
+
+exports.getJobByIdController = async (req, res) => {
+  try {
+    const job = await getJobById(req.params.id)
+    res.status(200).json({
+      success: true,
+      message: 'Job found successfully',
+      data: job
+    })
+  } catch (err) {
+    res.status(500).json({
+      success: false,
+      message: 'Unable to find job',
+      error: err.message
+    })
+  }
+}
